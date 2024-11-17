@@ -1,0 +1,52 @@
+@model IEnumerable<AccesoDatos.Models.Membresia>
+
+@{
+    ViewData["Title"] = "TIPOS DE MEMBRESIA";
+}
+
+<h1 class="text-center mt-4">@ViewData["Title"]</h1>
+
+<div class="row mb-5">
+    <div class="col-md-8">
+        <form asp-action="Index" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control rounded-start" name="searchString" placeholder="Buscar por tipo o descripción..." value="@ViewData["CurrentFilter"]" />
+                <button type="submit" class="btn btn-primary rounded-end">Buscar</button>
+            </div>
+            <div class="mt-2">
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Index">Limpiar</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4 text-md-right mt-3 mt-md-0">
+        <a class="btn btn-success btn-lg" asp-action="Create">+ Nueva Membresía</a>
+    </div>
+</div>
+
+<table class="table table-hover shadow-sm rounded" style="background-color: #ffffff; border: 2px solid #20c997;">
+    <thead style="background: linear-gradient(45deg, #8e44ad, #3498db); color: white;">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Tipo)</th>
+            <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+            <th>@Html.DisplayNameFor(model => model.Precio)</th>
+            <th>@Html.DisplayNameFor(model => model.DuracionDias)</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: #f8f9fa; border-bottom: 2px solid #20c997;">
+                <td style="color: #8e44ad;">@Html.DisplayFor(modelItem => item.Tipo)</td>
+                <td style="color: #3498db;">@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                <td style="color: #2ecc71;">@Html.DisplayFor(modelItem => item.Precio)</td>
+                <td style="color: #f39c12;">@Html.DisplayFor(modelItem => item.DuracionDias)</td>
+                <td class="text-center">
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a class="btn btn-sm btn-info mx-2" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
